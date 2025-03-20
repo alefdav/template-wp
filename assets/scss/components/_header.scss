@@ -1,0 +1,122 @@
+/* Estilos do cabeçalho */
+
+header{
+  background-color: blue;
+  nav{
+    background-color: red;
+  }
+}
+
+.site-header {
+  padding: $spacer 0;
+  background-color: $white;
+  box-shadow: 0 2px 4px rgba(0,0,0,.05);
+  position: relative;
+  z-index: 1000;
+  
+  // Versão fixa no topo
+  &.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    transition: transform 0.3s ease;
+    
+    &.nav-up {
+      transform: translateY(-100%);
+    }
+  }
+  
+  // Logo
+  .site-logo {
+    max-height: 60px;
+    width: auto;
+    
+    @include media-breakpoint-down(md) {
+      max-height: 45px;
+    }
+  }
+  
+  // Menu principal
+  .navbar {
+    padding: 0;
+    
+    .nav-link {
+      color: $dark;
+      padding: 0.5rem 1rem;
+      transition: color 0.2s ease;
+      position: relative;
+      
+      &:hover, &:focus, &.active {
+        color: $primary;
+      }
+      
+      // Efeito de sublinhado
+      &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: $primary;
+        transition: all 0.3s ease;
+      }
+      
+      &:hover::after,
+      &.active::after {
+        width: 80%;
+        left: 10%;
+      }
+    }
+    
+    // Submenu dropdown
+    .dropdown-menu {
+      border-radius: $border-radius;
+      box-shadow: 0 5px 15px rgba(0,0,0,.1);
+      border: none;
+      padding: 0.5rem 0;
+      
+      .dropdown-item {
+        padding: 0.5rem 1.5rem;
+        
+        &:hover, &:focus, &.active {
+          background-color: rgba($primary, 0.1);
+          color: $primary;
+        }
+      }
+    }
+  }
+  
+  // Botão de menu mobile
+  .navbar-toggler {
+    border: none;
+    padding: 0.25rem;
+    
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    
+    .navbar-toggler-icon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+}
+
+// Versão transparente para páginas de destaque
+.header-transparent {
+  background-color: transparent;
+  box-shadow: none;
+  position: absolute;
+  width: 100%;
+  
+  .nav-link {
+    color: $white;
+    
+    &:hover, &:focus, &.active {
+      color: rgba($white, 0.8);
+    }
+  }
+}

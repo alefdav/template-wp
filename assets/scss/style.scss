@@ -1,3 +1,63 @@
+// Variáveis de personalização do Bootstrap (devem vir antes da importação)
+// Cores principais
+$primary: #0d6efd;    // Cor primária da marca
+$secondary: #6c757d;  // Cor secundária da marca
+$success: #28a745;    // Verde para sucesso
+$info: #17a2b8;       // Azul para informações
+$warning: #ffc107;    // Amarelo para avisos
+$danger: #dc3545;     // Vermelho para erros
+$light: #f8f9fa;      // Tom claro
+$dark: #343a40;       // Tom escuro
+
+// Tipografia
+$font-family-base: 'Helvetica Neue', Arial, sans-serif;
+$headings-font-weight: 600;
+
+// Espaçamento e bordas
+$border-radius: 0.25rem;
+$spacer: 1rem;
+
+// Customização de breakpoints para responsividade
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// Importação seletiva do Bootstrap
+// Importe apenas os componentes necessários para reduzir o tamanho do CSS final
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+
+// Layout & components
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/accordion";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/modal";
+
+// Helpers e utilitários
+@import "~bootstrap/scss/helpers";
+@import "~bootstrap/scss/utilities/api";
+
 /* COMPONENTS */
 @import "components/tipografia";
 @import "components/base";
@@ -7,3 +67,4 @@
 
 /* PAGINAS */
 @import "pages/home";
+@import "pages/sobre";

@@ -14,5 +14,11 @@
 
 <body <?php body_class(); ?>>
   <header>
-
+    <nav>
+      <ul>
+        <li><a href="<?php echo home_url(); ?>">Home</a></li>
+        <li><a href="<?php echo home_url(); ?>/sobre">Sobre</a></li>
+        <li><a href="<?php echo home_url(); ?>/contato">Contato</a></li>
+      </ul>
+    </nav>
   </header>

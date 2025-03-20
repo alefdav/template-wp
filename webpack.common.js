@@ -1,6 +1,7 @@
 /* eslint-disable */
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: [
@@ -8,11 +9,14 @@ module.exports = {
         './assets/js/home.js'
     ],
     output: {
-        path: path.resolve(__dirname, 'dist/js'),
-        filename: 'scripts.js'
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'js/scripts.js'
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'css/styles.css',
+        }),
     ],
     module: {
         rules: [
@@ -29,8 +33,8 @@ module.exports = {
             {
                 test: /\.scss$/i,
                 use: [
-                  // Creates `style` nodes from JS strings
-                  'style-loader',
+                  // Extrai CSS em arquivos separados
+                  MiniCssExtractPlugin.loader,
                   // Translates CSS into CommonJS
                   'css-loader',
                   // Compiles Sass to CSS
