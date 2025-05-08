@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Funções principais do tema wp-template
  *
@@ -103,6 +104,19 @@ function prefix_category_title($title)
 }
 
 /**
+ * Adiciona nonce aos formulários de busca
+ *
+ * @param string $form O formulário de busca
+ * @return string O formulário modificado com nonce
+ */
+function add_search_form_nonce($form)
+{
+  $nonce = wp_create_nonce('search_form_nonce');
+  $form = str_replace('</form>', '<input type="hidden" name="search_nonce" value="' . $nonce . '" /></form>', $form);
+  return $form;
+}
+
+/**
  * Adiciona nonces aos formulários para proteção CSRF
  *
  * Implementa nonces em formulários de comentários e busca para
@@ -110,16 +124,14 @@ function prefix_category_title($title)
  * 
  * @return void
  */
-function add_security_to_forms() {
+function add_security_to_forms()
+{
   // Adicionar nonce aos formulários de comentários
-  wp_nonce_field('comment_nonce_action', 'comment_nonce_field');
-  
+  add_action('comment_form', function () {
+    wp_nonce_field('comment_nonce_action', 'comment_nonce_field');
+  });
+
   // Adicionar nonce aos formulários de busca
-  function add_search_form_nonce($form) {
-    $nonce = wp_create_nonce('search_form_nonce');
-    $form = str_replace('</form>', '<input type="hidden" name="search_nonce" value="' . $nonce . '" /></form>', $form);
-    return $form;
-  }
   add_filter('get_search_form', 'add_search_form_nonce');
 }
 
@@ -131,12 +143,13 @@ function add_security_to_forms() {
  * 
  * @return void
  */
-function verify_form_nonces() {
+function verify_form_nonces()
+{
   // Verificar nonce de comentários
   if (isset($_POST['comment_nonce_field']) && !wp_verify_nonce($_POST['comment_nonce_field'], 'comment_nonce_action')) {
     die(__('Falha na verificação de segurança', 'theme-textdomain'));
   }
-  
+
   // Verificar nonce de busca
   if (isset($_GET['s']) && isset($_GET['search_nonce']) && !wp_verify_nonce($_GET['search_nonce'], 'search_form_nonce')) {
     die(__('Falha na verificação de segurança', 'theme-textdomain'));
